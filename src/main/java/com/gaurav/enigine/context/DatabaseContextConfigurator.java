@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
 
 public abstract class DatabaseContextConfigurator {
     private FileHandlerPoolSingletonFactory fileHandlerPoolSingletonFactory;
@@ -156,16 +157,28 @@ public abstract class DatabaseContextConfigurator {
 
         @Override
         public void shutdownGracefully() {
+            java.util.List<Lock> acquiredLocks = new java.util.ArrayList<>();
             for (Scheme.Collection collection : getScheme().getCollections()) {
-                ReaderWriterLockPool.getInstance().getReaderWriterLock(getScheme(), collection).getWriteLock().lock();
+                Lock lock = ReaderWriterLockPool.getInstance().getReaderWriterLock(getScheme(), collection).getWriteLock();
+                lock.lock();
+                acquiredLocks.add(lock);
             }
             try {
-                getFileHandlerPoolFactory().getInstance().closeAll();
-            } catch (InternalOperationException e) {
-                logger.error("failed to close file handler instance", e);
+                try {
+                    getFileHandlerPoolFactory().getInstance().closeAll(
+                            getEngineConfig().getFileCloseTimeout(),
+                            getEngineConfig().getFileCloseUnit()
+                    );
+                } catch (InternalOperationException e) {
+                    logger.error("failed to close file handler instance", e);
+                }
+                getDatabaseStorageManagerFactory().getInstance().close();
+                getThreadPool().shutdownNow();
+            } finally {
+                for (int i = acquiredLocks.size() - 1; i >= 0; i--) {
+                    acquiredLocks.get(i).unlock();
+                }
             }
-            getDatabaseStorageManagerFactory().getInstance().close();
-            getThreadPool().shutdownNow();
         }
     }
 

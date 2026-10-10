@@ -234,8 +234,9 @@ public class SchemeManagerTestCase {
         Assertions.assertEquals(1, dbObject.getVersion());
 
         // --- ADDING THE DATA TO INDEX, WHICH IS CLUSTER INDEX AND IS AVAILABLE TO MANAGER TOO --- //
-        UniqueTreeIndexManager<UnsignedLong, Pointer> uniqueTreeIndexManager = (UniqueTreeIndexManager<UnsignedLong, Pointer>) collectionIndexProviderSingletonFactory.getInstance(scheme.getCollections().getFirst()).getClusterIndexManager();
-        Optional<Pointer> optionalPointer = uniqueTreeIndexManager.getIndex(UnsignedLong.valueOf(1));
+        UniqueTreeIndexManager<Long, Pointer> uniqueTreeIndexManager = (UniqueTreeIndexManager<Long, Pointer>) collectionIndexProviderSingletonFactory.getInstance(scheme.getCollections().getFirst()).getClusterIndexManager();
+        uniqueTreeIndexManager.addIndex(1L, pointer);
+        Optional<Pointer> optionalPointer = uniqueTreeIndexManager.getIndex(1L);
         Assertions.assertTrue(optionalPointer.isPresent());
         Assertions.assertEquals(pointer, optionalPointer.get());
 
@@ -263,7 +264,7 @@ public class SchemeManagerTestCase {
         // --- SELECTING OBJECT USING OLD POINTER TO MAKE SURE ITS CHANGED AND IS NO LONGER ALIVE --- //
         dbObject = databaseStorageManager.select(pointer).get();
         Assertions.assertFalse(dbObject.isAlive());
-        optionalPointer = uniqueTreeIndexManager.getIndex(UnsignedLong.valueOf(1));
+        optionalPointer = uniqueTreeIndexManager.getIndex(1L);
         Assertions.assertNotEquals(pointer, optionalPointer.get());
 
         // --- SELECTING UPDATED OBJECT AND CHECKING IF DEFAULT VALUE OF NEWLY ADDED FIELD IS SET --- //
@@ -290,7 +291,7 @@ public class SchemeManagerTestCase {
         );
         schemeManager.update();
 
-        optionalPointer = uniqueTreeIndexManager.getIndex(UnsignedLong.valueOf(1));
+        optionalPointer = uniqueTreeIndexManager.getIndex(1L);
         Assertions.assertEquals(pointer, optionalPointer.get());
         dbObject = databaseStorageManager.select(pointer).get();
         Assertions.assertTrue(dbObject.isAlive());
@@ -322,11 +323,11 @@ public class SchemeManagerTestCase {
         schemeManager.update();
 
 
-        UniqueTreeIndexManager<Integer, UnsignedLong> newFieldUniqueTreeIndexManager = (UniqueTreeIndexManager<Integer, UnsignedLong>) collectionIndexProviderSingletonFactory.getInstance(scheme.getCollections().getFirst()).getUniqueIndexManager(newField);
+        UniqueTreeIndexManager<Integer, Long> newFieldUniqueTreeIndexManager = (UniqueTreeIndexManager<Integer, Long>) collectionIndexProviderSingletonFactory.getInstance(scheme.getCollections().getFirst()).getUniqueIndexManager(newField);
         Assertions.assertEquals(1, newFieldUniqueTreeIndexManager.size());
-        Optional<UnsignedLong> optionalIndexValue = newFieldUniqueTreeIndexManager.getIndex(defaultValue);
+        Optional<Long> optionalIndexValue = newFieldUniqueTreeIndexManager.getIndex(defaultValue);
         Assertions.assertTrue(optionalIndexValue.isPresent());
-        Assertions.assertEquals(UnsignedLong.valueOf(1L), optionalIndexValue.get());
+        Assertions.assertEquals(1L, optionalIndexValue.get());
 
     }
 }

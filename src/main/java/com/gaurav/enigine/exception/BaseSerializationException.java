@@ -15,5 +15,4 @@ public class BaseSerializationException extends Exception {
     public BaseSerializationException(Throwable cause) {
         super(cause);
     }
-
 }

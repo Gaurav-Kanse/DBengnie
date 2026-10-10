@@ -61,11 +61,19 @@ public class FileHandler {
     private void close(boolean limitedWait, long timeout, TimeUnit timeUnit) throws InternalOperationException {
         this.closed = Boolean.TRUE;
         synchronized (this){
+            long deadline = limitedWait
+                    ? System.nanoTime() + timeUnit.toNanos(timeout)
+                    : Long.MAX_VALUE;
             try {
                 while (usageCount > 0){
                     try {
                         if (limitedWait){
-                            wait(timeUnit.toMillis(timeout));
+                            long remainingNanos = deadline - System.nanoTime();
+                            if (remainingNanos <= 0) {
+                                logger.warn("Closing file channel with {} active references after timeout", usageCount);
+                                break;
+                            }
+                            TimeUnit.NANOSECONDS.timedWait(this, remainingNanos);
                         } else {
                             wait();
                         }
@@ -107,16 +115,22 @@ public class FileHandler {
         }
 
         public static synchronized SingletonFileHandlerFactory getInstance(@Nullable ExecutorService executorService){
+            // Context-owned executors must not be captured by the process-wide singleton:
+            // a database context shuts its executor down, and a later context needs a live one.
+            if (executorService != null) {
+                return new SingletonFileHandlerFactory(executorService);
+            }
             if (FACTORY_INSTANCE == null){
                 FACTORY_INSTANCE = new SingletonFileHandlerFactory();
-                if (executorService != null){
-                    FACTORY_INSTANCE.executorService = executorService;
-                }
             }
             return FACTORY_INSTANCE;
         }
 
         private SingletonFileHandlerFactory(){}
+
+        private SingletonFileHandlerFactory(ExecutorService executorService) {
+            this.executorService = executorService;
+        }
 
         @Override
         public synchronized FileHandler getFileHandler(String path) throws IOException {

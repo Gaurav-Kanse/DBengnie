@@ -10,21 +10,19 @@ public class MutableDBObjectDecorator extends DBObject {
     }
 
     public void modifyData(int offset, byte[] value){
-        // todo: throw err
+        super.modifyData(offset, value);
     }
 
     public void setCollectionId(int collectionId) {
-        // todo: throw err
-
+        super.setCollectionId(collectionId);
     }
 
     public void setSize(int size) {
-        // todo: throw err
-
+        super.setSize(size);
     }
 
     public void deactivate() {
-        // todo: throw err
+        super.deactivate();
     }
 
 }

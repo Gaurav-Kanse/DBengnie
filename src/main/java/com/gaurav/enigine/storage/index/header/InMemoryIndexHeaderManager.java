@@ -7,7 +7,15 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class InMemoryIndexHeaderManager implements IndexHeaderManager {
-    private final Header header = new Header();
+    protected final Header header;
+
+    public InMemoryIndexHeaderManager() {
+        this(new Header());
+    }
+
+    protected InMemoryIndexHeaderManager(Header header) {
+        this.header = Objects.requireNonNull(header);
+    }
 
     @Override
     public synchronized Optional<Location> getRootOfIndex(int indexId) {

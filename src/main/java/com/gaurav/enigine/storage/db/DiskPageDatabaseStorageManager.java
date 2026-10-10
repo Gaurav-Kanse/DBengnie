@@ -214,34 +214,34 @@ public class DiskPageDatabaseStorageManager implements DatabaseStorageManager {
 
 
     private void commitPage(Page page) throws InternalOperationException {
-        Path path = getDBFileName(page.getChunk());
-        AsynchronousFileChannel fileChannel = this.fileHandlerPool.getFileChannel(path, 100, TimeUnit.SECONDS);
-
-        // Todo: could return future instead maybe? Or just queue for submission?
-        //       For transactions we'd need something similar to FileSessionIO!
-        //       In such case, releasing the page from buffer should happen after write is completed
-        //       Maybe would be a good idea to do that (last line) here now too?  Temp Answer: No, we'd release twice for a single acquire
-        //       Call backs could help in that case (CompletableFuture has such functionality)
-        try {
-            FileUtils.write(fileChannel, (long) page.getPageNumber() * this.engineConfig.getDbPageSize(), page.getData()).get();
-        } catch (ExecutionException | InterruptedException e) {
-            throw new InternalOperationException(EM_FILE_WRITE, e);
-        } finally {
-            this.fileHandlerPool.releaseFileChannel(path, 100, TimeUnit.SECONDS); // Todo
+        // A page is written as one full-page snapshot. Serialize snapshot creation and writes
+        // per page so an earlier asynchronous write cannot finish after and overwrite a newer one.
+        synchronized (page) {
+            Path path = getDBFileName(page.getChunk());
+            AsynchronousFileChannel fileChannel = this.fileHandlerPool.getFileChannel(path, 100, TimeUnit.SECONDS);
+            try {
+                FileUtils.write(fileChannel, (long) page.getPageNumber() * this.engineConfig.getDbPageSize(), page.getData()).get();
+            } catch (ExecutionException e) {
+                throw new InternalOperationException(EM_FILE_WRITE, e);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new InternalOperationException(EM_FILE_WRITE, e);
+            } finally {
+                this.fileHandlerPool.releaseFileChannel(path, 100, TimeUnit.SECONDS);
+            }
         }
 
     }
 
     // Factory function to be used only in the buffer
     private Page pageFactory(PageBuffer.PageTitle pageTitle) throws InternalOperationException {
+        Path path = getDBFileName(pageTitle.chunk());
+        AsynchronousFileChannel fileChannel = fileHandlerPool.getFileChannel(
+                path,
+                100,
+                TimeUnit.SECONDS
+        );
         try {
-            Path path = getDBFileName(pageTitle.chunk());
-
-            AsynchronousFileChannel fileChannel = fileHandlerPool.getFileChannel(
-                    path,
-                    100,        // Todo
-                    TimeUnit.SECONDS
-            );
             int size = this.engineConfig.getDbPageSize();
             int offset = pageTitle.pageNumber() * size;
 
@@ -253,7 +253,6 @@ public class DiskPageDatabaseStorageManager implements DatabaseStorageManager {
                 data = FileUtils.readBytes(fileChannel, offset, size).get();
             }
 
-            fileHandlerPool.releaseFileChannel(path, 100, TimeUnit.SECONDS);
             return new Page(
                     pageTitle.pageNumber(),
                     size,
@@ -261,7 +260,12 @@ public class DiskPageDatabaseStorageManager implements DatabaseStorageManager {
                     data
             );
         } catch (InterruptedException | IOException | ExecutionException e) {
+            if (e instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
             throw new InternalOperationException(ErrorMessage.EM_FILE_ALLOCATION, e);
+        } finally {
+            fileHandlerPool.releaseFileChannel(path, 100, TimeUnit.SECONDS);
         }
     }
 
@@ -336,18 +340,23 @@ public class DiskPageDatabaseStorageManager implements DatabaseStorageManager {
         }
 
         synchronized (this){
+            Path path = getDBFileName(lastChunk);
+            AsynchronousFileChannel fileChannel = null;
             try {
-                AsynchronousFileChannel fileChannel = fileHandlerPool.getFileChannel(getDBFileName(lastChunk), 100, TimeUnit.SECONDS);// Todo
+                fileChannel = fileHandlerPool.getFileChannel(path, 100, TimeUnit.SECONDS);
                 long fileSize = fileChannel.size();
                 long size = fileSize == 0 ? 0 : fileSize - 1;
                 int pageNumber = (int) (size / this.engineConfig.getDbPageSize());
-                fileHandlerPool.releaseFileChannel(getDBFileName(lastChunk), 100, TimeUnit.SECONDS);  // Todo
 
                 this.lastPageTitle = new PageBuffer.PageTitle(lastChunk, pageNumber);
 
                 return Optional.of(this.pageBuffer.acquire(this.lastPageTitle));
             } catch (IOException e) {
                 throw new InternalOperationException(EM_FILEHANDLER_POOL, e);
+            } finally {
+                if (fileChannel != null) {
+                    fileHandlerPool.releaseFileChannel(path, 100, TimeUnit.SECONDS);
+                }
             }
         }
     }

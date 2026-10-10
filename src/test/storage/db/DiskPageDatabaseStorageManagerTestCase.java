@@ -2,7 +2,6 @@ package com.github.sepgh.test.storage.db;
 
 import com.github.sepgh.test.utils.FileUtils;
 import com.gaurav.enigine.context.EngineConfig;
-import com.gaurav.enigine.ds.KeyValue;
 import com.gaurav.enigine.ds.Pointer;
 import com.gaurav.enigine.exception.InternalOperationException;
 import com.gaurav.enigine.exception.InvalidDBObjectWrapper;
@@ -238,7 +237,8 @@ public class DiskPageDatabaseStorageManagerTestCase {
         int cases = 20;
 
         ExecutorService executorService = Executors.newFixedThreadPool(cases);
-        List<KeyValue<String, Pointer>> keyValues = new CopyOnWriteArrayList<>();
+        record StoredValue(byte[] value, Pointer pointer) {}
+        List<StoredValue> storedValues = new CopyOnWriteArrayList<>();
 
         CountDownLatch countDownLatch = new CountDownLatch(cases);
 
@@ -247,11 +247,9 @@ public class DiskPageDatabaseStorageManagerTestCase {
                 Random random = new Random();
                 byte[] array = new byte[random.nextInt(100) + 1]; // length is bounded by 7
                 random.nextBytes(array);
-                String generatedString = new String(array, StandardCharsets.UTF_8);
                 try {
-                    byte[] generatedStringBytes = generatedString.getBytes(StandardCharsets.UTF_8);
-                    Pointer pointer = storageManager.store(-1, 1, 1, generatedStringBytes);
-                    keyValues.add(new KeyValue<>(generatedString, pointer));
+                    Pointer pointer = storageManager.store(-1, 1, 1, array);
+                    storedValues.add(new StoredValue(array, pointer));
                 } catch (InternalOperationException e) {
                     throw new RuntimeException(e);
                 } finally {
@@ -262,12 +260,11 @@ public class DiskPageDatabaseStorageManagerTestCase {
 
         countDownLatch.await();
 
-        for (KeyValue<String, Pointer> keyValue : keyValues) {
-            Optional<DBObject> dbObject = storageManager.select(keyValue.value());
+        for (StoredValue storedValue : storedValues) {
+            Optional<DBObject> dbObject = storageManager.select(storedValue.pointer());
             Assertions.assertTrue(dbObject.isPresent());
             Assertions.assertTrue(dbObject.get().isAlive());
-            String value = new String(dbObject.get().getData(), StandardCharsets.UTF_8);
-            Assertions.assertEquals(keyValue.key(), value);
+            Assertions.assertArrayEquals(storedValue.value(), dbObject.get().getData());
         }
 
 

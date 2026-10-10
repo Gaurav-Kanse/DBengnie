@@ -9,28 +9,31 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class JsonIndexHeaderManager extends InMemoryIndexHeaderManager {
 
     private final Path path;
-    private final Header header;
     private final Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting().serializeNulls().create();
 
     public JsonIndexHeaderManager(Path path) throws IOException {
-        Header Header1;
+        super(loadHeader(path));
         this.path = path;
-
-        Header readObject;
-        try (JsonReader jsonReader = new JsonReader(new FileReader(path.toFile()))) {
-            readObject = gson.fromJson(jsonReader, Header.class);
-            Header1 = readObject;
-        } catch (FileNotFoundException e) {
-            Header1 = new Header();
+        if (!Files.exists(path)) {
             this.write();
         }
+    }
 
-        this.header = Header1;
+    private static Header loadHeader(Path path) throws IOException {
+        if (!Files.exists(path)) {
+            return new Header();
+        }
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().setPrettyPrinting().serializeNulls().create();
+        try (JsonReader jsonReader = new JsonReader(new FileReader(path.toFile()))) {
+            Header header = gson.fromJson(jsonReader, Header.class);
+            return header == null ? new Header() : header;
+        }
     }
 
     private synchronized void write() throws IOException {

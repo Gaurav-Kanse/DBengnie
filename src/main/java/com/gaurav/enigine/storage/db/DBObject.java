@@ -161,7 +161,7 @@ public class DBObject {
         );
     }
 
-    private void setSize(int size) {
+    protected void setSize(int size) {
         this.modified = true;
 
         System.arraycopy(

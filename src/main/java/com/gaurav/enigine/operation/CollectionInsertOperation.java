@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.exception.DeserializationException;
-import com.github.sepgh.testudo.exception.InternalOperationException;
-import com.github.sepgh.testudo.exception.SerializationException;
+import com.gaurav.enigine.exception.DeserializationException;
+import com.gaurav.enigine.exception.InternalOperationException;
+import com.gaurav.enigine.exception.SerializationException;
 
 public interface CollectionInsertOperation<T extends Number & Comparable<T>> {
     <V> V execute(V v) throws SerializationException, InternalOperationException, DeserializationException;

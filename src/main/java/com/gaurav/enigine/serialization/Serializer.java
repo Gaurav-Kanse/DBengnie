@@ -1,9 +1,9 @@
-package com.github.sepgh.testudo.serialization;
+package com.gaurav.enigine.serialization;
 
-import com.github.sepgh.testudo.exception.DeserializationException;
-import com.github.sepgh.testudo.exception.SerializationException;
-import com.github.sepgh.testudo.index.data.IndexBinaryObjectFactory;
-import com.github.sepgh.testudo.scheme.Scheme;
+import com.gaurav.enigine.exception.DeserializationException;
+import com.gaurav.enigine.exception.SerializationException;
+import com.gaurav.enigine.index.data.IndexBinaryObjectFactory;
+import com.gaurav.enigine.scheme.Scheme;
 
 import java.util.List;
 

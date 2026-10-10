@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.exception;
+package com.gaurav.enigine.exception;
 
 public class InvalidDBObjectWrapper extends InternalOperationException {
     public InvalidDBObjectWrapper(String message) {

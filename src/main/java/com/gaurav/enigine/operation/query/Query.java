@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.operation.query;
+package com.gaurav.enigine.operation.query;
 
-import com.github.sepgh.testudo.operation.CollectionIndexProvider;
-import com.github.sepgh.testudo.utils.IteratorUtils;
+import com.gaurav.enigine.operation.CollectionIndexProvider;
+import com.gaurav.enigine.utils.IteratorUtils;
 import com.google.common.base.Preconditions;
 import lombok.SneakyThrows;
 

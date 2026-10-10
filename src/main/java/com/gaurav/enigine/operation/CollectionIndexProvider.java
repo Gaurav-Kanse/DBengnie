@@ -1,11 +1,11 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.ds.Pointer;
-import com.github.sepgh.testudo.index.DuplicateQueryableIndex;
-import com.github.sepgh.testudo.index.UniqueQueryableIndex;
-import com.github.sepgh.testudo.index.UniqueTreeIndexManager;
-import com.github.sepgh.testudo.operation.query.Queryable;
-import com.github.sepgh.testudo.scheme.Scheme;
+import com.gaurav.enigine.ds.Pointer;
+import com.gaurav.enigine.index.DuplicateQueryableIndex;
+import com.gaurav.enigine.index.UniqueQueryableIndex;
+import com.gaurav.enigine.index.UniqueTreeIndexManager;
+import com.gaurav.enigine.operation.query.Queryable;
+import com.gaurav.enigine.scheme.Scheme;
 
 
 public interface CollectionIndexProvider {

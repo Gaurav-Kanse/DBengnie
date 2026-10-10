@@ -1,7 +1,7 @@
 package com.github.sepgh.test.operation.query;
 
-import com.github.sepgh.testudo.operation.query.AndIterator;
-import com.github.sepgh.testudo.operation.query.BitmapIterationCacheFactory;
+import com.gaurav.enigine.operation.query.AndIterator;
+import com.gaurav.enigine.operation.query.BitmapIterationCacheFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

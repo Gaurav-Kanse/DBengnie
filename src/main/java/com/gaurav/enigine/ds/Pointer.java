@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.ds;
+package com.gaurav.enigine.ds;
 
-import com.github.sepgh.testudo.utils.BinaryUtils;
+import com.gaurav.enigine.utils.BinaryUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;

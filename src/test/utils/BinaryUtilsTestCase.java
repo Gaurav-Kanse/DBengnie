@@ -1,6 +1,6 @@
 package com.github.sepgh.test.utils;
 
-import com.github.sepgh.testudo.utils.BinaryUtils;
+import com.gaurav.enigine.utils.BinaryUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

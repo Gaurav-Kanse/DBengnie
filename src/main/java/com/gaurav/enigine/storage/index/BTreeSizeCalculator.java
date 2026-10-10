@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.storage.index;
+package com.gaurav.enigine.storage.index;
 
-import com.github.sepgh.testudo.ds.Pointer;
-import com.github.sepgh.testudo.index.data.PointerIndexBinaryObject;
+import com.gaurav.enigine.ds.Pointer;
+import com.gaurav.enigine.index.data.PointerIndexBinaryObject;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -1,14 +1,14 @@
 package com.github.sepgh.test.serializer;
 
-import com.github.sepgh.testudo.exception.DeserializationException;
-import com.github.sepgh.testudo.exception.SerializationException;
-import com.github.sepgh.testudo.scheme.Scheme;
-import com.github.sepgh.testudo.scheme.annotation.Collection;
-import com.github.sepgh.testudo.scheme.annotation.Field;
-import com.github.sepgh.testudo.scheme.annotation.Index;
-import com.github.sepgh.testudo.serialization.CharArrSerializer;
-import com.github.sepgh.testudo.serialization.ModelDeserializer;
-import com.github.sepgh.testudo.serialization.ModelSerializer;
+import com.gaurav.enigine.exception.DeserializationException;
+import com.gaurav.enigine.exception.SerializationException;
+import com.gaurav.enigine.scheme.Scheme;
+import com.gaurav.enigine.scheme.annotation.Collection;
+import com.gaurav.enigine.scheme.annotation.Field;
+import com.gaurav.enigine.scheme.annotation.Index;
+import com.gaurav.enigine.serialization.CharArrSerializer;
+import com.gaurav.enigine.serialization.ModelDeserializer;
+import com.gaurav.enigine.serialization.ModelSerializer;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 import lombok.*;

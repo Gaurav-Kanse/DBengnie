@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.scheme.Scheme;
-import com.github.sepgh.testudo.utils.ReaderWriterLock;
+import com.gaurav.enigine.scheme.Scheme;
+import com.gaurav.enigine.utils.ReaderWriterLock;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

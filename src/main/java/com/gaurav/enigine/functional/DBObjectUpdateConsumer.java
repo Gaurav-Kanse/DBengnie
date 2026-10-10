@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.functional;
+package com.gaurav.enigine.functional;
 
 
-import com.github.sepgh.testudo.exception.InvalidDBObjectWrapper;
+import com.gaurav.enigine.exception.InvalidDBObjectWrapper;
 
 @FunctionalInterface
 public interface DBObjectUpdateConsumer<T> {

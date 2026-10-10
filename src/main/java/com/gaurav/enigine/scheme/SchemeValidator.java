@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.scheme;
+package com.gaurav.enigine.scheme;
 
 public class SchemeValidator {
 

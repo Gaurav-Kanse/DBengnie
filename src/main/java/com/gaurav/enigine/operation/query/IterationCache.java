@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.operation.query;
+package com.gaurav.enigine.operation.query;
 
 public interface IterationCache<T extends Number> {
     void add(int cacheIndex, T value);

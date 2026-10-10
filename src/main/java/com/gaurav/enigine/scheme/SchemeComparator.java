@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.scheme;
+package com.gaurav.enigine.scheme;
 
 import lombok.AllArgsConstructor;
 

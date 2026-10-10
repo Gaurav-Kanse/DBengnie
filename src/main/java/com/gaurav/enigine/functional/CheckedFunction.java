@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.functional;
+package com.gaurav.enigine.functional;
 
 @FunctionalInterface
 public interface CheckedFunction<I, O, E extends Exception> {

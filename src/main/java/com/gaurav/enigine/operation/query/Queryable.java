@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.operation.query;
+package com.gaurav.enigine.operation.query;
 
-import com.github.sepgh.testudo.ds.KeyValue;
-import com.github.sepgh.testudo.exception.InternalOperationException;
-import com.github.sepgh.testudo.utils.IteratorUtils;
+import com.gaurav.enigine.ds.KeyValue;
+import com.gaurav.enigine.exception.InternalOperationException;
+import com.gaurav.enigine.utils.IteratorUtils;
 
 import java.util.Iterator;
 

@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.index.data;
+package com.gaurav.enigine.index.data;
 
-import com.github.sepgh.testudo.exception.DeserializationException;
+import com.gaurav.enigine.exception.DeserializationException;
 
 public interface IndexBinaryObject<E> {
     E asObject() throws DeserializationException;

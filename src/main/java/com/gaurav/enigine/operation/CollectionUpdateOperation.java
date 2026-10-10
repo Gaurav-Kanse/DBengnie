@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.exception.BaseSerializationException;
-import com.github.sepgh.testudo.exception.InternalOperationException;
-import com.github.sepgh.testudo.operation.query.Query;
+import com.gaurav.enigine.exception.BaseSerializationException;
+import com.gaurav.enigine.exception.InternalOperationException;
+import com.gaurav.enigine.operation.query.Query;
 
 import java.util.function.Consumer;
 

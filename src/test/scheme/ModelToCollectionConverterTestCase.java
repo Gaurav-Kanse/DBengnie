@@ -1,10 +1,10 @@
 package com.github.sepgh.test.scheme;
 
-import com.github.sepgh.testudo.scheme.ModelToCollectionConverter;
-import com.github.sepgh.testudo.scheme.Scheme;
-import com.github.sepgh.testudo.scheme.annotation.Collection;
-import com.github.sepgh.testudo.scheme.annotation.Field;
-import com.github.sepgh.testudo.scheme.annotation.Index;
+import com.gaurav.enigine.scheme.ModelToCollectionConverter;
+import com.gaurav.enigine.scheme.Scheme;
+import com.gaurav.enigine.scheme.annotation.Collection;
+import com.gaurav.enigine.scheme.annotation.Field;
+import com.gaurav.enigine.scheme.annotation.Index;
 import lombok.Getter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

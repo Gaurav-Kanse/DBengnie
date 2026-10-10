@@ -1,11 +1,11 @@
-package com.github.sepgh.testudo.utils;
+package com.gaurav.enigine.utils;
 
-import com.github.sepgh.testudo.exception.DeserializationException;
-import com.github.sepgh.testudo.exception.SerializationException;
-import com.github.sepgh.testudo.scheme.Scheme;
-import com.github.sepgh.testudo.serialization.CollectionSerializationUtil;
-import com.github.sepgh.testudo.serialization.Serializer;
-import com.github.sepgh.testudo.serialization.SerializerRegistry;
+import com.gaurav.enigine.exception.DeserializationException;
+import com.gaurav.enigine.exception.SerializationException;
+import com.gaurav.enigine.scheme.Scheme;
+import com.gaurav.enigine.serialization.CollectionSerializationUtil;
+import com.gaurav.enigine.serialization.Serializer;
+import com.gaurav.enigine.serialization.SerializerRegistry;
 import lombok.Getter;
 
 import java.util.HashMap;

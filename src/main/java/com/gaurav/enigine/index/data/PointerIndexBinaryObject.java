@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.index.data;
+package com.gaurav.enigine.index.data;
 
-import com.github.sepgh.testudo.ds.Pointer;
+import com.gaurav.enigine.ds.Pointer;
 import lombok.Getter;
 
 @Getter

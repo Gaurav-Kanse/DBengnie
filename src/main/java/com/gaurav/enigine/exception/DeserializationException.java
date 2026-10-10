@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.exception;
+package com.gaurav.enigine.exception;
 
 public class DeserializationException extends BaseSerializationException {
     private static final String MESSAGE_PREPEND = "Deserialization Error: ";

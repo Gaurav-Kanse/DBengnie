@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.storage.db;
+package com.gaurav.enigine.storage.db;
 
-import com.github.sepgh.testudo.context.EngineConfig;
-import com.github.sepgh.testudo.storage.pool.FileHandlerPoolSingletonFactory;
+import com.gaurav.enigine.context.EngineConfig;
+import com.gaurav.enigine.storage.pool.FileHandlerPoolSingletonFactory;
 
 public abstract class DatabaseStorageManagerSingletonFactory {
     protected final EngineConfig engineConfig;

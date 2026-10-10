@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.exception;
+package com.gaurav.enigine.exception;
 
 public class VerificationException extends InternalOperationException {
     public static final String PREFIX = "Verification Error: ";

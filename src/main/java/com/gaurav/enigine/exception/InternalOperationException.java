@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.exception;
+package com.gaurav.enigine.exception;
 
 public class InternalOperationException extends Exception {
     private static final String PREFIX = "Testudo core error: ";

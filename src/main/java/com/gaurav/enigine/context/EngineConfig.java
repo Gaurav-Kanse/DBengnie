@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.context;
+package com.gaurav.enigine.context;
 
-import com.github.sepgh.testudo.serialization.FieldType;
+import com.gaurav.enigine.serialization.FieldType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

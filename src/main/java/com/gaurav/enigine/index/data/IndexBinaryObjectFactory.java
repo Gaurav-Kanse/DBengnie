@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.index.data;
+package com.gaurav.enigine.index.data;
 
-import com.github.sepgh.testudo.exception.IndexBinaryObjectCreationException;
+import com.gaurav.enigine.exception.IndexBinaryObjectCreationException;
 
 public interface IndexBinaryObjectFactory<E> {
     IndexBinaryObject<E> create(E e) throws IndexBinaryObjectCreationException;

@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.scheme.Scheme;
-import com.github.sepgh.testudo.storage.db.DatabaseStorageManager;
-import com.github.sepgh.testudo.storage.db.DatabaseStorageManagerSingletonFactory;
+import com.gaurav.enigine.scheme.Scheme;
+import com.gaurav.enigine.storage.db.DatabaseStorageManager;
+import com.gaurav.enigine.storage.db.DatabaseStorageManagerSingletonFactory;
 
 public class CollectionOperationFactory {
     protected final Scheme scheme;

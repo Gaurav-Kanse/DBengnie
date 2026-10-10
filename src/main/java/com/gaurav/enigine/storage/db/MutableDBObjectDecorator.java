@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.storage.db;
+package com.gaurav.enigine.storage.db;
 
 
-import com.github.sepgh.testudo.exception.InvalidDBObjectWrapper;
+import com.gaurav.enigine.exception.InvalidDBObjectWrapper;
 
 public class MutableDBObjectDecorator extends DBObject {
 

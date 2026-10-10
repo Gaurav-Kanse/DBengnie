@@ -1,9 +1,9 @@
-package com.github.sepgh.testudo.serialization;
+package com.gaurav.enigine.serialization;
 
-import com.github.sepgh.testudo.ds.Bitmap;
-import com.github.sepgh.testudo.exception.SerializationException;
-import com.github.sepgh.testudo.scheme.ModelToCollectionConverter;
-import com.github.sepgh.testudo.scheme.Scheme;
+import com.gaurav.enigine.ds.Bitmap;
+import com.gaurav.enigine.exception.SerializationException;
+import com.gaurav.enigine.scheme.ModelToCollectionConverter;
+import com.gaurav.enigine.scheme.Scheme;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;

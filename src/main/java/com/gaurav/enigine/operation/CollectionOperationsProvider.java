@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
 public interface CollectionOperationsProvider {
     <T extends Number & Comparable<T>> CollectionSelectOperation<T> newSelectOperation();

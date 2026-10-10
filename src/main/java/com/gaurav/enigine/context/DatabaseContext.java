@@ -1,7 +1,7 @@
-package com.github.sepgh.testudo.context;
+package com.gaurav.enigine.context;
 
-import com.github.sepgh.testudo.operation.CollectionOperation;
-import com.github.sepgh.testudo.scheme.Scheme;
+import com.gaurav.enigine.operation.CollectionOperation;
+import com.gaurav.enigine.scheme.Scheme;
 
 public interface DatabaseContext {
     Scheme getScheme();

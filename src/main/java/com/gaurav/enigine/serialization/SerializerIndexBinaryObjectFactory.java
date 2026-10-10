@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.serialization;
+package com.gaurav.enigine.serialization;
 
-import com.github.sepgh.testudo.index.data.IndexBinaryObject;
-import com.github.sepgh.testudo.index.data.IndexBinaryObjectFactory;
-import com.github.sepgh.testudo.scheme.Scheme;
+import com.gaurav.enigine.index.data.IndexBinaryObject;
+import com.gaurav.enigine.index.data.IndexBinaryObjectFactory;
+import com.gaurav.enigine.scheme.Scheme;
 import lombok.SneakyThrows;
 
 import java.util.function.Function;

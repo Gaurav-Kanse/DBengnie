@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.operation;
+package com.gaurav.enigine.operation;
 
-import com.github.sepgh.testudo.operation.query.Query;
-import com.github.sepgh.testudo.storage.db.DBObject;
-import com.github.sepgh.testudo.utils.LockableIterator;
+import com.gaurav.enigine.operation.query.Query;
+import com.gaurav.enigine.storage.db.DBObject;
+import com.gaurav.enigine.utils.LockableIterator;
 
 import java.util.List;
 

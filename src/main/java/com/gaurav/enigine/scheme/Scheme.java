@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.scheme;
+package com.gaurav.enigine.scheme;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -114,7 +114,7 @@ public class Scheme {
             return primary || unique;
         }
 
-        public static Index fromAnnotation(com.github.sepgh.testudo.scheme.annotation.Index annotation){
+        public static Index fromAnnotation(com.gaurav.enigine.scheme.annotation.Index annotation){
             if (annotation.enable())
                 return Index.builder()
                         .primary(annotation.primary())

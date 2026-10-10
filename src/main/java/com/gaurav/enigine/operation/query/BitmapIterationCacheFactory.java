@@ -1,6 +1,6 @@
-package com.github.sepgh.testudo.operation.query;
+package com.gaurav.enigine.operation.query;
 
-import com.github.sepgh.testudo.ds.Bitmap;
+import com.gaurav.enigine.ds.Bitmap;
 
 import java.util.HashMap;
 import java.util.Map;

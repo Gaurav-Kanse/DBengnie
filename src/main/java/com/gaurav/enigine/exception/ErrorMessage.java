@@ -1,4 +1,4 @@
-package com.github.sepgh.testudo.exception;
+package com.gaurav.enigine.exception;
 
 public interface ErrorMessage {
     String EM_FILEHANDLER_POOL = "Could not receive file channel from file handler pool";

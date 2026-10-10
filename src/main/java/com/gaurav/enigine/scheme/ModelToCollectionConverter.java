@@ -1,9 +1,9 @@
-package com.github.sepgh.testudo.scheme;
+package com.gaurav.enigine.scheme;
 
-import com.github.sepgh.testudo.scheme.annotation.Collection;
-import com.github.sepgh.testudo.scheme.annotation.Field;
-import com.github.sepgh.testudo.scheme.annotation.Index;
-import com.github.sepgh.testudo.serialization.SerializerRegistry;
+import com.gaurav.enigine.scheme.annotation.Collection;
+import com.gaurav.enigine.scheme.annotation.Field;
+import com.gaurav.enigine.scheme.annotation.Index;
+import com.gaurav.enigine.serialization.SerializerRegistry;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 

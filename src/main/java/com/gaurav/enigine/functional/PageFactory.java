@@ -1,8 +1,8 @@
-package com.github.sepgh.testudo.functional;
+package com.gaurav.enigine.functional;
 
-import com.github.sepgh.testudo.exception.InternalOperationException;
-import com.github.sepgh.testudo.storage.db.Page;
-import com.github.sepgh.testudo.storage.db.PageBuffer;
+import com.gaurav.enigine.exception.InternalOperationException;
+import com.gaurav.enigine.storage.db.Page;
+import com.gaurav.enigine.storage.db.PageBuffer;
 
 @FunctionalInterface
 public interface PageFactory {
